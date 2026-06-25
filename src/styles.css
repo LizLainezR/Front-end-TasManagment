@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+@import "primeicons/primeicons.css";
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family:
+        Inter,
+        system-ui,
+        sans-serif;
+    background: #f1f5f9;
+}
+
+* {
+    box-sizing: border-box;
+}

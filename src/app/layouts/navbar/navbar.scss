@@ -1,0 +1,333 @@
+// Variables de paleta tecnológica y natural
+$bg-main: rgba(15, 23, 42, 0.75);
+$border-color: rgba(30, 41, 59, 0.7);
+$border-glow: rgba(59, 130, 246, 0.4);
+$text-active: #ffffff;
+$text-main: #f1f5f9;
+$text-muted: #64748b;
+$accent-blue: #3b82f6;
+$accent-danger: #ef4444;
+$font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+// Mixin reutilizable para el estado de enfoque (Keyboard Navigation)
+@mixin tech-focus {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px $accent-blue;
+  }
+}
+
+.navbar {
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: $bg-main;
+  color: $text-active;
+  border-bottom: 1px solid $border-color;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  font-family: $font-family;
+  backdrop-filter: blur(62px);
+  -webkit-backdrop-filter: blur(222px);
+  user-select: none; // Evita selección accidental de texto al interactuar
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-title {
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+  user-select: none;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+/* Opcional: Un ligero cambio al pasar el mouse si va a ser un enlace al inicio */
+.navbar-title:hover {
+  opacity: 0.85;
+}
+
+/* BUSCADOR ESTILO COMANDOS */
+.search-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 5px 10px 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  @include tech-focus;
+
+  i {
+    color: $text-muted;
+    font-size: 0.8rem;
+  }
+
+  .search-text {
+    font-size: 0.75rem;
+    color: $text-muted;
+    font-weight: 400;
+  }
+
+  .search-shortcut {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 0.65rem;
+    color: $text-muted;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+
+  &:hover {
+    background-color: rgba(30, 41, 59, 0.7);
+    border-color: $border-glow;
+
+    i,
+    .search-text {
+      color: $text-main;
+    }
+  }
+}
+
+/* BOTÓN NOTIFICACIONES */
+.notification-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: $text-muted;
+  font-size: 1rem;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  @include tech-focus;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: $text-active;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .notification-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 5px;
+    height: 5px;
+    background-color: $accent-blue;
+    border-radius: 50%;
+    box-shadow: 0 0 8px $accent-blue;
+  }
+}
+
+.user-container {
+  position: relative;
+}
+
+/* CONTENEDOR INFORMACIÓN USUARIO */
+.user-info {
+  background: transparent;
+  border: 7px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  @include tech-focus;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.05);
+
+    .username {
+      color: $text-active;
+    }
+
+    .user-avatar {
+      color: $text-active;
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .user-avatar {
+    color: $text-muted;
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .username {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: $text-main;
+  }
+}
+
+.dropdown-arrow {
+  font-size: 0.6rem;
+  color: $text-muted;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.rotate {
+    transform: rotate(180deg);
+  }
+}
+
+/* MENÚ DESPLEGABLE AVANZADO (GLASSMORPHISM) */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 210px;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  padding: 6px;
+  z-index: 100;
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  .dropdown-header {
+    padding: 8px 10px;
+
+    .user-email {
+      font-size: 0.75rem;
+      color: $text-muted;
+      font-family: monospace;
+    }
+  }
+
+  .dropdown-divider {
+    border: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.06);
+    margin: 6px 4px;
+  }
+
+  .dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: $text-main;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+    @include tech-focus;
+
+    i {
+      color: $text-muted;
+      font-size: 0.85rem;
+      transition: color 0.15s ease;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: $text-active;
+      border-color: rgba(255, 255, 255, 0.03);
+
+      i {
+        color: $text-active;
+      }
+    }
+
+    &.logout {
+      color: #fca5a5;
+
+      i {
+        color: rgba($accent-danger, 0.7);
+      }
+
+      &:hover {
+        background-color: rgba($accent-danger, 0.08);
+        border-color: rgba($accent-danger, 0.15);
+
+        i {
+          color: $accent-danger;
+        }
+      }
+    }
+  }
+}
+
+/* OPTIMIZACIÓN RESPONSIVA (MÓVILES) */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .search-trigger {
+    margin-left: 8px;
+    padding: 6px; // Lo vuelve un botón cuadrado táctil
+
+    .search-text,
+    .search-shortcut {
+      display: none;
+    }
+
+    // Oculta textos largos
+  }
+
+  .user-info {
+    padding: 4px;
+
+    .username,
+    .dropdown-arrow {
+      display: none;
+    }
+
+    // Solo deja el avatar visible
+  }
+
+  .profile-dropdown {
+    right: -8px; // Centra mejor el menú en pantallas reducidas
+  }
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

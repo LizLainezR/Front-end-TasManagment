@@ -1,0 +1,19 @@
+<div class="layout" [class.collapsed]="isCollapsed()">
+
+  <aside class="sidebar">
+    <app-sidebar></app-sidebar>
+  </aside>
+
+  <div class="main-area">
+
+    <header class="navbar">
+      <app-navbar></app-navbar>
+    </header>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

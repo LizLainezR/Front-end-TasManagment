@@ -1,0 +1,57 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  transition: width 0.3s ease;
+  background: #0f172a;
+  color: white;
+  overflow: hidden;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* MAIN AREA (navbar + contenido) */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 80px;
+  flex-shrink: 0;
+  background: #0f172a;
+}
+
+/* CONTENT */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  background: #e2eaf2;
+  padding: 16px;
+}
+
+/* COLLAPSED STATE */
+.layout.collapsed .sidebar {
+  width: 70px; /* solo iconos */
+}
+
+.label {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.label.hidden {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}

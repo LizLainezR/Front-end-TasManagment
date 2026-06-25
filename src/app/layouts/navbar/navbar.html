@@ -1,0 +1,49 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <h2 class="navbar-title">Task Manager</h2>
+
+    <button class="search-trigger" (click)="openSearch()" aria-label="Buscar tareas">
+      <i class="pi pi-search"></i>
+      <span class="search-text">Buscar...</span>
+      <kbd class="search-shortcut">Ctrl K</kbd>
+    </button>
+  </div>
+
+  <div class="navbar-right">
+    <button class="notification-btn" aria-label="Notificaciones">
+      <i class="pi pi-bell"></i>
+      <span class="notification-badge"></span>
+    </button>
+
+    <div class="user-container">
+      <button 
+        class="user-info" 
+        (click)="toggleUserDropdown()" 
+        [attr.aria-expanded]="isUserDropdownOpen()"
+        aria-haspopup="true"
+        aria-label="Menú de usuario">
+        <i class="pi pi-user user-avatar"></i>
+        <span class="username">{{ username }}</span>
+        <i class="pi pi-chevron-down dropdown-arrow" [class.rotate]="isUserDropdownOpen()"></i>
+      </button>
+
+      @if (isUserDropdownOpen()) {
+        <div class="profile-dropdown" role="menu">
+          <div class="dropdown-header" role="none">
+            <span class="user-email">lizlainez@taskmanager.com</span>
+          </div>
+          <hr class="dropdown-divider">
+          <button class="dropdown-item" role="menuitem" (click)="isUserDropdownOpen.set(false)">
+            <i class="pi pi-user"></i>
+            <span>Mi Perfil</span>
+          </button>
+          <hr class="dropdown-divider">
+          <button class="dropdown-item logout" role="menuitem" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            <span>Salir</span>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</header>
