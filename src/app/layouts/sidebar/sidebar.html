@@ -1,0 +1,70 @@
+<nav class="sidebar" [class.collapsed]="isCollapsed()">
+  <div class="sidebar-header">
+    <button 
+      type="button"
+      class="menu-btn" 
+      (click)="toggleSidebar()" 
+      aria-label="Toggle Sidebar"
+    >
+      <i class="pi pi-bars"></i>
+    </button>
+  </div>
+
+  @if (!loading()) {
+    <ul class="menu-list">
+      @for (menu of menuItems(); track menu.id) {
+        <li class="menu-item">
+          <button
+            type="button"
+            class="menu-header"
+            (click)="toggleMenu(menu.id)"
+            [attr.aria-expanded]="activeMenuId() === menu.id"
+          >
+            <span class="menu-title">
+              @if (menu.icon) {
+                <i class="menu-icon {{ menu.icon }}" aria-hidden="true"></i>
+              }
+
+              <span class="menu-text" [class.hidden-text]="isCollapsed()">
+                {{ menu.name }}
+              </span>
+            </span>
+
+            @if (menu.submenus?.length && !isCollapsed()) {
+              <i class="pi pi-chevron-down arrow" [class.rotate]="activeMenuId() === menu.id" aria-hidden="true"></i>
+            }
+          </button>
+
+          @if (!isCollapsed() && menu.submenus?.length) {
+            <div class="submenu-wrapper" [class.open]="activeMenuId() === menu.id">
+              <ul class="submenu">
+                @for (sub of menu.submenus; track sub.id) {
+                  <li>
+                    <a
+                      class="submenu-item"
+                      [routerLink]="sub.route"
+                      routerLinkActive="active-submenu"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                      @if (sub.icon) {
+                        <i class="{{ sub.icon }}" aria-hidden="true"></i>
+                      }
+                      <span>{{ sub.name }}</span>
+                    </a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="loading">
+      <i class="pi pi-spin pi-spinner text-lg"></i>
+      @if (!isCollapsed()) {
+        <span class="menu-text">Cargando menú...</span>
+      }
+    </div>
+  }
+</nav>
